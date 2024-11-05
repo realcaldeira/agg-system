@@ -22,13 +22,12 @@ public class Beneficio {
     private String loginUser;
     private String passwordUser;
 
-    private Boolean isNetflix;
-    private Boolean isHboMax;
-    private Boolean isDisneyPlus;
-    private Boolean isPremiere;
-    private Boolean isPrimeVideo;
+    private Boolean isNetflix = false;
+    private Boolean isHboMax = false;
+    private Boolean isDisneyPlus = false;
+    private Boolean isPremiere = false;
+    private Boolean isPrimeVideo = false;
 
-    @ManyToMany(mappedBy = "beneficios")
-    private Set<Colaborador> colaboradores;
+
 
 }

@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface ColaboradorRepository extends JpaRepository<Colaborador, Long> {
     boolean existsByCpf(String cpf);
     Optional<Colaborador> findByCpf(String cpf);
+
+    boolean existsByCpfAndIdNot(String cpf, Long id);
 }

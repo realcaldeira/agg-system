@@ -2,6 +2,7 @@ package br.com.aggransystem.domain.controller;
 
 import br.com.aggransystem.domain.entity.Colaborador;
 import br.com.aggransystem.domain.service.ColaboradorService;
+import br.com.aggransystem.domain.service.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,25 +38,30 @@ public class ColaboradorController {
     }
 
 
+
     @PostMapping
-    public ResponseEntity<?> createColaborador(@RequestBody Colaborador colaborador) {
-        if (colaboradorService.existsByCpf(colaborador.getCpf())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("Já existe um colaborador com o CPF informado.");
-        }
-        Colaborador novoColaborador = colaboradorService.saveColaborador(colaborador);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoColaborador);
+    public ResponseEntity<Colaborador> createColaborador(@RequestBody Colaborador request) {
+        Colaborador colaborador = colaboradorService.saveColaborador(request);
+        return ResponseEntity.ok(colaborador);
     }
 
     @PutMapping("/{id}")
-    public Colaborador updateColaborador(@PathVariable("id") Long id, @RequestBody Colaborador colaborador) {
-        return colaboradorService.updateColaborador(colaborador);
+    public ResponseEntity<?> updateColaborador(@PathVariable("id") Long id, @RequestBody Colaborador colaborador) {
+
+        boolean cpfExists = colaboradorService.cpfExistsForDifferentColaborador(colaborador.getCpf(), id);
+        if (!cpfExists) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Erro: CPF inválido");
+        }
+
+        Colaborador updatedColaborador = colaboradorService.saveColaborador(colaborador);
+        return ResponseEntity.ok(updatedColaborador);
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteColaborador(@PathVariable Long id) {
-        colaboradorService.deactivateColaborador(id);
+    public ResponseEntity<?> deleteColaborador(@PathVariable Long id) throws ResourceNotFoundException {
+        colaboradorService.deleteColaborador(id);
         return ResponseEntity.ok("Colaborador desativado com sucesso.");
     }
 

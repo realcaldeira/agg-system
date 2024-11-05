@@ -22,7 +22,7 @@ public class Colaborador {
     private String email;
     private Boolean ativo = true; // Colaborador ativo por padrão
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "colaborador_beneficio",
             joinColumns = @JoinColumn(name = "colaborador_id"),
@@ -30,15 +30,10 @@ public class Colaborador {
     )
     private Set<Beneficio> beneficios;
 
+
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
-    public void addBeneficio(Beneficio beneficio) {
-        this.beneficios.add(beneficio);
-    }
 
-    public void removeBeneficio(Beneficio beneficio) {
-        this.beneficios.remove(beneficio);
-    }
 }

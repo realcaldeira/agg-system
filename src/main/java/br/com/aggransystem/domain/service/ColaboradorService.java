@@ -27,10 +27,6 @@ public class ColaboradorService {
         return colaboradorRepository.save(colaborador);
     }
 
-    public Colaborador updateColaborador(Colaborador colaborador) {
-        return colaboradorRepository.save(colaborador);
-    }
-
 
     public void deleteColaborador(Long id) throws ResourceNotFoundException {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
@@ -38,18 +34,7 @@ public class ColaboradorService {
             Colaborador colaboradorToUpdate = colaborador.get();
             colaboradorToUpdate.setAtivo(false);
             colaboradorRepository.save(colaboradorToUpdate);
-        } else {
-            throw new ResourceNotFoundException("Colaborador com id " + id + " não encontrado");
         }
-    }
-
-    public Colaborador findColaboradorById(Long id) {
-        return colaboradorRepository.findById(id).get();
-    }
-
-
-    public boolean existsByCpf(String cpf) {
-        return colaboradorRepository.existsByCpf(cpf);
     }
 
 
@@ -57,6 +42,8 @@ public class ColaboradorService {
         return colaboradorRepository.findByCpf(cpf);
     }
 
-    public void deactivateColaborador(Long id) {
+
+    public boolean cpfExistsForDifferentColaborador(String cpf, Long id) {
+        return colaboradorRepository.existsByCpfAndIdNot(cpf, id);
     }
 }
