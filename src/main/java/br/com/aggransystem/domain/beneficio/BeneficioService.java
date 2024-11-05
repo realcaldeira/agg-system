@@ -1,7 +1,6 @@
-package br.com.aggransystem.domain.service;
+package br.com.aggransystem.domain.beneficio;
 
-import br.com.aggransystem.domain.entity.Beneficio;
-import br.com.aggransystem.domain.repository.BeneficioRepository;
+import br.com.aggransystem.domain.beneficio.entity.Beneficio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

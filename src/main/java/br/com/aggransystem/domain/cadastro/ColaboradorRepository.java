@@ -1,6 +1,6 @@
-package br.com.aggransystem.domain.repository;
+package br.com.aggransystem.domain.cadastro;
 
-import br.com.aggransystem.domain.entity.Colaborador;
+import br.com.aggransystem.domain.cadastro.entity.Colaborador;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

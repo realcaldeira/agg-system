@@ -1,9 +1,9 @@
 // ColaboradorService.java
-package br.com.aggransystem.domain.service;
+package br.com.aggransystem.domain.cadastro;
 
 
-import br.com.aggransystem.domain.entity.Colaborador;
-import br.com.aggransystem.domain.repository.ColaboradorRepository;
+import br.com.aggransystem.domain.cadastro.entity.Colaborador;
+import br.com.aggransystem.domain.service.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

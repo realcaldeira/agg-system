@@ -1,7 +1,6 @@
-package br.com.aggransystem.domain.controller;
+package br.com.aggransystem.domain.cadastro;
 
-import br.com.aggransystem.domain.entity.Colaborador;
-import br.com.aggransystem.domain.service.ColaboradorService;
+import br.com.aggransystem.domain.cadastro.entity.Colaborador;
 import br.com.aggransystem.domain.service.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

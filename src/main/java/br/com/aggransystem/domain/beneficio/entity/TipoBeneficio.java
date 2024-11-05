@@ -1,4 +1,4 @@
-package br.com.aggransystem.domain.entity;
+package br.com.aggransystem.domain.beneficio.entity;
 
 public enum TipoBeneficio {
     NETFLIX,

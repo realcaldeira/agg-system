@@ -1,6 +1,6 @@
-package br.com.aggransystem.domain.repository;
+package br.com.aggransystem.domain.beneficio;
 
-import br.com.aggransystem.domain.entity.Beneficio;
+import br.com.aggransystem.domain.beneficio.entity.Beneficio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

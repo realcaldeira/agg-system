@@ -1,5 +1,6 @@
-package br.com.aggransystem.domain.entity;
+package br.com.aggransystem.domain.cadastro.entity;
 
+import br.com.aggransystem.domain.beneficio.entity.Beneficio;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
