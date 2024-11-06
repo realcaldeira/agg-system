@@ -12,7 +12,7 @@ public class BeneficioService {
     private BeneficioRepository beneficioRepository;
 
     @Transactional
-    public Beneficio atualizarBeneficio(Beneficio beneficio) {
+    public Beneficio updateBeneficio(Beneficio beneficio) {
         return beneficioRepository.save(beneficio);
     }
 }

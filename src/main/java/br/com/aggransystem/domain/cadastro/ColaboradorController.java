@@ -1,3 +1,4 @@
+
 package br.com.aggransystem.domain.cadastro;
 
 import br.com.aggransystem.domain.cadastro.entity.Colaborador;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/api/colaboradores")
@@ -36,33 +36,31 @@ public class ColaboradorController {
         }
     }
 
-
-
     @PostMapping
-    public ResponseEntity<Colaborador> createColaborador(@RequestBody Colaborador request) {
-        Colaborador colaborador = colaboradorService.saveColaborador(request);
-        return ResponseEntity.ok(colaborador);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateColaborador(@PathVariable("id") Long id, @RequestBody Colaborador colaborador) {
-
-        boolean cpfExists = colaboradorService.cpfExistsForDifferentColaborador(colaborador.getCpf(), id);
-        if (!cpfExists) {
+    public ResponseEntity<?> createColaborador(@RequestBody Colaborador request) {
+        if (colaboradorService.findByCpf(request.getCpf()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Erro: CPF inválido");
+                    .body("Já existe um colaborador cadastrado com o CPF " + request.getCpf());
         }
 
-        Colaborador updatedColaborador = colaboradorService.saveColaborador(colaborador);
-        return ResponseEntity.ok(updatedColaborador);
+        Colaborador colaborador = colaboradorService.saveColaborador(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(colaborador);
     }
 
+
+    @PutMapping("/{cpf}")
+    public ResponseEntity<?> updateColaborador(@PathVariable("cpf") String cpf, @RequestBody Colaborador request) {
+        try {
+            Colaborador updatedColaborador = colaboradorService.updateColaboradorByCpf(cpf, request);
+            return ResponseEntity.ok(updatedColaborador);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteColaborador(@PathVariable Long id) throws ResourceNotFoundException {
         colaboradorService.deleteColaborador(id);
         return ResponseEntity.ok("Colaborador desativado com sucesso.");
     }
-
-
 }

@@ -26,6 +26,4 @@ public class Beneficio {
     private Boolean isPremiere = false;
     private Boolean isPrimeVideo = false;
 
-
-
 }

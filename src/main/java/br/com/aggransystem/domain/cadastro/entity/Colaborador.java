@@ -21,7 +21,7 @@ public class Colaborador {
     private String cpf;
     private String dataNascimento;
     private String email;
-    private Boolean ativo = true; // Colaborador ativo por padrão
+    private Boolean ativo = true;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
